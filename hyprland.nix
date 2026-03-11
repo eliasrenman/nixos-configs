@@ -1,9 +1,20 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+  imports = [
+    ./modules/bat-tokyonight.nix
+  ];
+
   # Enable the Hyprland Desktop Environment.
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
+
+  # Fonts (Nerd Fonts for waybar icons)
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    nerd-fonts.symbols-only
+  ];
 
   # SDDM with Hyprland/ricing theme
   services.displayManager.sddm = {
