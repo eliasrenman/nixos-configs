@@ -4,7 +4,6 @@
   # Enable the Hyprland Desktop Environment.
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
-  programs.hyprland.enableNvidiaPatches = true;
 
   # SDDM with Hyprland/ricing theme
   services.xserver.displayManager.sddm = {
