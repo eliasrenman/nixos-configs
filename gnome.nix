@@ -1,14 +1,14 @@
 { config, pkgs, ... }:
 
 {
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager.gdm = {
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm = {
     enable = true;
     wayland = true;
   };
 
   # Remove GNOME bloat you probably don't want
-  environment.gnome.excludePackages = with pkgs.gnome; [
+  environment.gnome.excludePackages = with pkgs; [
     gnome-music
     gnome-weather
     gnome-maps
@@ -17,7 +17,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    gnome.gnome-tweaks
+    gnome-tweaks
     gnome-extension-manager
   ];
 }

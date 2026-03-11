@@ -8,11 +8,11 @@
   imports =
     [
       <nixos-hardware/huawei/machc-wa>
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
       ./packages.nix
       # Uncomment the relevant desktop environment:
       # ./hyprland.nix
-      # ./gnome.nix
+      ./gnome.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -59,11 +59,11 @@
   };
 
   fonts.fontDir.enable = true;
-  fonts.packages = with pkgs; [
-    nerdfonts
-  ];
+#  fonts.packages = with pkgs; [
+#    nerdfonts
+#  ];
 
-  services.acpid.enable = true;
+ # services.acpid.enable = true;
   location.latitude = 63.825848;
   location.longitude = -20.263035;
 
@@ -76,7 +76,7 @@
 
   services.printing.enable = true;
 
-  sound.enable = true;
+#  sound.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -90,9 +90,9 @@
   };
 
   services.xserver.enable = true;
-  services.xserver.libinput.enable = true;
-  services.xserver.layout = "se";
-  services.xserver.xkbVariant = "mac";
+  services.libinput.enable = true;
+  services.xserver.xkb.layout = "se";
+  services.xserver.xkb.variant = "mac";
 
   security.polkit.enable = true;
 
@@ -101,27 +101,29 @@
     description = "Elias Renman";
     home = "/home/elias";
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "dialout" ];
   };
 
   system.stateVersion = "18.09";
 
-  services.logind.extraConfig = ''
-    # don't shutdown when power button is short-pressed
-    HandlePowerKey=ignore
-  '';
+#  services.logind.extraConfig = ''
+#    # don't shutdown when power button is short-pressed
+#    HandlePowerKey=ignore
+#  '';
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    MOZ_USE_XINPUT2 = "1";
+  };
 
   environment.variables = {
     PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig";
   };
 
   # Nvidia driver configuration
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   services.xserver.videoDrivers = ["nvidia"];
@@ -135,9 +137,11 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  virtualisation.docker.rootless = {
+  virtualisation.docker = {
     enable = true;
-    setSocketVariable = true;
+    daemon.settings = {
+      dns = [ "8.8.8.8" "8.8.4.4" ];
+    };
   };
 
   virtualisation.virtualbox.host.enable = true;

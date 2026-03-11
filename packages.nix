@@ -22,7 +22,7 @@
     gnumake
     scons
     cmake
-    gcc8
+#    gcc8
     clang
     clang-analyzer
     clang-manpages
@@ -38,25 +38,28 @@
 
     rustup
     python3
-    nodejs_18
+#    nodejs_18
     corepack
 
     # GUI tools
-    kicad-small
+#    kicad-small
     xfce.thunar
     xfce.thunar-archive-plugin
-    libsForQt5.koko
+#    libsForQt5.koko
     firefox
+    vivaldi
     alacritty
     vlc
     pavucontrol
     discord
     spotify
-    jetbrains-toolbox
-    aseprite
-    godot_4
+#    jetbrains-toolbox
+#    aseprite
+#    godot_4
     alsa-tools
-    insomnia
+    zed-editor
+    bruno
+    warp-terminal
 
     # CLI Tools
     neofetch
@@ -67,8 +70,8 @@
     killall
     pamixer
     glances
-    spotify-tui
-    spotifyd
+ #   spotify-tui
+#    spotifyd
 
     # Media
     ffmpeg-full
@@ -81,5 +84,7 @@
     # FPV related
     betaflight-configurator
     chromium
+    espeak-ng          # TTS with Swedish voice for RotorHazard
+    speechd
   ];
 }
