@@ -51,5 +51,6 @@
   # Environment variables
   environment.variables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+    LANGUAGE = "en_US:en";  # Force English messages for Git and other programs
   };
 }
