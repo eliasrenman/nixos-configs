@@ -6,7 +6,7 @@
   programs.hyprland.xwayland.enable = true;
 
   # SDDM with Hyprland/ricing theme
-  services.xserver.displayManager.sddm = {
+  services.displayManager.sddm = {
     enable = true;
     theme = "chili";
   };
@@ -35,18 +35,17 @@
     slurp
     grim
     wl-clipboard
-    xwaylandvideobridge
     swaylock-effects
 
     # SDDM theme
     sddm-chili-theme
-    libsForQt5.sddm
-    libsForQt5.polkit-kde-agent
+    kdePackages.sddm
+    kdePackages.polkit-kde-agent-1
 
     # Ricing tools & themes
     cava
     nwg-look
-    tokyo-night-gtk
+    tokyonight-gtk-theme
     material-icons
 
     # Ricing deps
