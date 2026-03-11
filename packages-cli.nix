@@ -24,6 +24,7 @@
     gnumake
     scons
     cmake
+    gcc
     clang
     clang-analyzer
     clang-manpages

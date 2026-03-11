@@ -77,5 +77,12 @@
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "elias" ];
 
+  # Mini PC specific packages
+  environment.systemPackages = with pkgs; [
+    aseprite
+    godot_4
+    blender
+  ];
+
   system.stateVersion = "24.05";
 }
