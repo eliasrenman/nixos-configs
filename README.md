@@ -1,22 +1,38 @@
-* Download [NixOS ISO](https://nixos.org/nixos/download.html)
-* Write the ISO to a USB drive using `dd`
-* Boot machine from ISO
-* Install git: `nix-env -i git`
-* Clone configuration: `git clone https://github.com/eliasrenman/nixos-config.git`
-* Follow the [installation guide](https://nixos.org/nixos/manual/index.html#sec-installation) up to `nixos-generate-config`
-  * Copy nixos configuration files to `/mnt`: `cp nixos-config/* /mnt/etc/nixos`
-  * Generate hardware config: `nixos-generate-config`
-  * Install system: `nixos-install` (set root password)
-* Reboot
-* Login as root
-* Set password for `elias`: `passwd elias`
-* Log out and login as `elias` setting `hyprland` as desktop session
-* Generate an SSH key for the new machine: `ssh-keygen`
-* [Add SSH key to github profile](https://github.com/settings/ssh/new)
- <!--
-# Remove this until i've create dotfiles * Clone dotfiles: `git clone --recursive git@github.com:willprice/dotfiles.git ~/.dotfiles`
-# * Install dotfiles: `cd ~/.dotfiles; ./install-all.sh`
--->
+## Installation
+
+1. Download [NixOS ISO](https://nixos.org/nixos/download.html)
+2. Write the ISO to a USB drive using `dd`
+3. Boot machine from ISO
+4. Install git: `nix-env -i git`
+5. Clone configuration: `git clone https://github.com/eliasrenman/nixos-configs.git`
+6. Reboot
+7. Login as root
+8. Set user password: `passwd <username>`
+9. Log out and login as user (desktop session depends on host config, see table below)
+
+## Available Hosts
+
+| Host | Desktop | Description |
+|------|---------|-------------|
+| `laptop` | GNOME | Laptop configuration |
+| `minipc` | Hyprland | Mini PC configuration |
+| `wsl` | CLI only | Windows Subsystem for Linux |
+
+## Usage
+
+Use the build script to rebuild your system:
+
+```bash
+./build.sh <host> <command>
+
+# Examples:
+./build.sh laptop switch    # Build and switch to new config
+./build.sh minipc build     # Build without switching
+./build.sh wsl dry-build    # Test build without applying
+```
+
+Available commands: `switch`, `boot`, `test`, `build`, `dry-build`, `dry-activate`
+
 ## Virtualbox setup
 
 - System -> Motherboard -> Enable EFI
@@ -33,4 +49,5 @@
 
 ### NixOS
 
-* Configuration file: `/etc/nixos/configuration.nix`
+* Configuration files: `host-*.nix`, `common.nix`, `packages-*.nix`
+* Rebuild system: `./build.sh <host> switch`
