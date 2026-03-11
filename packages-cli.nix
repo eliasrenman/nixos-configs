@@ -49,6 +49,7 @@
     killall
     glances
     qmk
+    claude-code
 
     # Editors
     neovim

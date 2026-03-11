@@ -45,7 +45,6 @@
     # Ricing tools & themes
     cava
     nwg-look
-    stow
     tokyonight-gtk-theme
     material-icons
 
