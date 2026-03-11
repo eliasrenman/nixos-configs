@@ -35,6 +35,7 @@
     # Languages & runtimes
     rustup
     python3
+    python3Packages.pip
     go
     bun
     pipx
@@ -47,6 +48,7 @@
     gh
     killall
     glances
+    qmk
 
     # Editors
     neovim
