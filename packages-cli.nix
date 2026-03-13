@@ -1,6 +1,9 @@
 # CLI tools and development toolchains - shared by all machines
 { config, pkgs, ... }:
 
+let
+  claude-code = pkgs.callPackage ./modules/claude-code.nix {};
+in
 {
   environment.systemPackages = with pkgs; [
     # Basic utilities

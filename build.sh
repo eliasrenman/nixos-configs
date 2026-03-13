@@ -62,4 +62,6 @@ case "$COMMAND" in
 esac
 
 echo "Building '$HOST' with command '$COMMAND'..."
-sudo nixos-rebuild "$COMMAND" -I nixos-config="$HOST_FILE" "$@"
+sudo nixos-rebuild "$COMMAND" \
+    -I nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos \
+    -I nixos-config="$HOST_FILE" "$@"
