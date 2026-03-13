@@ -10,5 +10,6 @@
     ./wofi-style.nix
     ./avizo.nix
     ./wlogout.nix
+    ./cursor.nix
   ];
 }

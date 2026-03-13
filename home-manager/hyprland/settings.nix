@@ -22,9 +22,9 @@
 
     # Environment variables
     env = [
+      "XCURSOR_THEME,Bibata-Modern-Ice"
       "XCURSOR_SIZE,24"
       "GDK_SCALE,2"
-      "XCURSOR_SIZE,32"
     ];
 
     # Input configuration
