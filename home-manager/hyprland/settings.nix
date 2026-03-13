@@ -14,7 +14,7 @@
 
     # Autostart
     exec-once = [
-      "wlsunset"
+      "hyprsunset -t 4000"
       "hyprpaper"
       "waybar"
       "avizo-service"

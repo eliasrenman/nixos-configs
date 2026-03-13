@@ -32,7 +32,7 @@
     wlogout
     wofi
     waybar
-    wlsunset
+    hyprsunset
     slurp
     grim
     wl-clipboard

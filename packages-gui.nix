@@ -4,8 +4,6 @@
 {
   environment.systemPackages = with pkgs; [
     # Browsers
-    firefox
-    vivaldi
     chromium
 
     # Editors/IDEs

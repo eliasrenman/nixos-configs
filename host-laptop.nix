@@ -65,8 +65,8 @@
   fonts.fontDir.enable = true;
 
   # Location (for redshift/wlsunset)
-  location.latitude = 63.825848;
-  location.longitude = -20.263035;
+  location.latitude = 57.7089;
+  location.longitude = 11.9746;
 
   # Wayland session variables
   environment.sessionVariables = {
@@ -93,6 +93,10 @@
 
   # Laptop-specific packages
   environment.systemPackages = with pkgs; [
+    # Browsers
+    firefox
+    vivaldi
+
     # FPV related
     betaflight-configurator
 
