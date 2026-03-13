@@ -107,7 +107,7 @@ in
       "$mainMod, H, exec, ${hypr-keybinds}/bin/hypr-keybinds"
 
       # Screenshot
-      ", Print, exec, grim -g \"$(slurp -d)\" - | wl-copy"
+      ", Print, exec, grim -g \"$(slurp -d)\" - | wl-copy -t image/png"
       "$mainMod, Print, exec, hyprpicker -a"
 
       # Brightness

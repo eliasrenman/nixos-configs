@@ -9,6 +9,7 @@
     ./common.nix
     ./packages-cli.nix
     ./packages-gui.nix
+    ./modules/zen-browser.nix
     ./hyprland.nix
     ./regreet.nix
   ];
@@ -84,6 +85,7 @@
 
   # Mini PC specific packages
   environment.systemPackages = with pkgs; [
+    anytype
     aseprite
     godot_4
     blender

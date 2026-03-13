@@ -34,7 +34,7 @@
 
       # Idle inhibit
       "idleinhibit focus, class:^(mpv)$"
-      "idleinhibit fullscreen, class:^(firefox)$"
+      "idleinhibit fullscreen, class:^(zen)$"
 
       # Size/position
       "size 800 600, title:^(Volume Control)$"
@@ -42,7 +42,7 @@
 
       # Workspace assignments
       "workspace 1, class:^(alacritty)$"
-      "workspace 2, class:^(firefox)$"
+      "workspace 2, class:^(zen)$"
       "workspace 3, class:^(discord)$"
       "workspace 3, title:^(Spotify)(.*)$"
       "workspace 3, class:^(Slack)$"
