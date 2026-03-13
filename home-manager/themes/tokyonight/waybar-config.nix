@@ -185,7 +185,7 @@
 
         "custom/power" = {
           format = "⏻";
-          on-click = "wlogout";
+          on-click = "wlogout-wrapper";
           tooltip = false;
         };
 

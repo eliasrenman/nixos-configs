@@ -9,5 +9,6 @@
     ./alacritty.nix
     ./wofi-style.nix
     ./avizo.nix
+    ./wlogout.nix
   ];
 }

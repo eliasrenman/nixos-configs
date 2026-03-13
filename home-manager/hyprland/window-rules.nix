@@ -27,9 +27,8 @@
       "tile, title:^(.*)Aseprite(.*)$"
 
       # Wlogout
-      "fullscreen, class:^(wlogout)$"
-      "float, title:^(wlogout)$"
-      "fullscreen, title:^(wlogout)$"
+      "float, class:^(wlogout)$"
+      "noanim, class:^(wlogout)$"
 
       # Idle inhibit
       "idleinhibit focus, class:^(mpv)$"
