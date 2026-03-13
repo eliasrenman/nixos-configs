@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
+  services.avizo.enable = true;
+
   # Avizo (volume/brightness OSD) Tokyo Night styling
   xdg.configFile."avizo/config.ini".text = ''
     [default]
