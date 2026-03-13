@@ -14,7 +14,11 @@
 
   # Boot loader
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.consoleMode = "max";
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Early KMS: load AMD GPU driver in initrd for Plymouth and boot splash
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
   # fsck will fail under vbox and cause a boot to hang, so turn it off
   boot.initrd.checkJournalingFS = false;
