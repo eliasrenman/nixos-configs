@@ -39,8 +39,8 @@
         "idle_inhibitor" = {
           format = "{icon} ";
           format-icons = {
-            activated = "";
-            deactivated = "";
+            activated = "";
+            deactivated = "";
           };
         };
 
@@ -51,19 +51,19 @@
           };
           format = "{capacity}% {icon} ";
           format-charging = "{capacity}% 󰂄";
-          format-plugged = "{capacity}% ";
-          format-icons = [ "" "" "" "" "" ];
+          format-plugged = "{capacity}% ";
+          format-icons = [ "" "" "" "" "" ];
         };
 
         clock = {
           interval = 10;
-          format = "{:%e %b %Y %H:%M} ";
+          format = "{:%e %b %Y %H:%M}";
           tooltip-format = "{:%e %B %Y}";
         };
 
         cpu = {
           interval = 5;
-          format = "  {usage}% ({load})";
+          format = "  {usage}% ({load})";
           states = {
             warning = 70;
             critical = 90;
@@ -73,7 +73,7 @@
 
         memory = {
           interval = 5;
-          format = "  {}%";
+          format = "  {}%";
           on-click = "alacritty -e 'glances'";
           states = {
             warning = 70;
@@ -83,16 +83,16 @@
 
         network = {
           interval = 5;
-          format-wifi = "";
-          format-ethernet = "";
-          format-disconnected = "  Disconnected";
+          format-wifi = "";
+          format-ethernet = "";
+          format-disconnected = "⚠  Disconnected";
           tooltip-format = "{ifname}: {ipaddr}";
           on-click = "alacritty -e 'nmtui'";
         };
 
         "network#vpn" = {
           interface = "tun0";
-          format = " ";
+          format = " ";
           format-disconnected = "  Disconnected";
           tooltip-format = "{ifname}: {ipaddr}/{cidr}";
         };
@@ -130,17 +130,17 @@
         pulseaudio = {
           scroll-step = 1;
           format = "{icon} {volume}%";
-          format-bluetooth = "{volume}% {icon}  {format_source}";
-          format-bluetooth-muted = " {icon}  {format_source}";
+          format-bluetooth = "{volume}% {icon}  {format_source}";
+          format-bluetooth-muted = " {icon}  {format_source}";
           format-muted = "󰸈";
           format-icons = {
             headphone = "󰋋";
             hands-free = "וֹ";
             headset = " 󰥰 ";
-            phone = "";
-            portable = "";
-            car = "";
-            default = [ "" ];
+            phone = "";
+            portable = "";
+            car = "";
+            default = [ "" ];
           };
           on-click = "volumectl toggle-mute";
           on-click-right = "pavucontrol";
@@ -150,8 +150,8 @@
 
         "pulseaudio#microphone" = {
           format = "{format_source}";
-          format-source = " {volume}%";
-          format-source-muted = " ";
+          format-source = " {volume}%";
+          format-source-muted = " ";
           on-click = "volumectl -m toggle-mute";
           on-click-right = "pavucontrol";
           on-scroll-up = "volumectl -m up";
@@ -178,7 +178,7 @@
 
         "backlight#value" = {
           format = "{icon} {percent}%";
-          format-icons = [ " " ];
+          format-icons = [ " " ];
           on-scroll-down = "lightctl down";
           on-scroll-up = "lightctl up";
         };
