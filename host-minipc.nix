@@ -10,6 +10,7 @@
     ./packages-cli.nix
     ./packages-gui.nix
     ./hyprland.nix
+    ./regreet.nix
   ];
 
   # Boot loader
