@@ -1,7 +1,13 @@
 { config, pkgs, lib, ... }:
 
+let
+  hostname = lib.strings.removeSuffix "\n" (builtins.readFile /etc/hostname);
+  isHyprland = hostname == "minipc";
+in
 {
   imports = [
+    ./zsh.nix
+  ] ++ lib.optionals isHyprland [
     ./hyprland
     ./themes/tokyonight
   ];

@@ -1,13 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Symlink home-manager config directory for standalone usage
-  system.activationScripts.homeManagerConfig = lib.stringAfter [ "users" ] ''
-    rm -rf /home/elias/.config/home-manager
-    ln -sf /home/elias/nixos-configs/home-manager /home/elias/.config/home-manager
-    chown -h elias:users /home/elias/.config/home-manager
-  '';
-
   # Enable the Hyprland Desktop Environment.
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
@@ -39,9 +32,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    # Home manager (standalone)
-    home-manager
-
     # Hyprland ecosystem
     hyprland
     hyprpaper

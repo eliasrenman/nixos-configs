@@ -20,6 +20,7 @@ in
 
     # Shell
     zsh
+    home-manager
 
     # Build toolchains
     autoconf

@@ -1,5 +1,5 @@
 # Common configuration shared by all machines
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Allow proprietary packages
@@ -13,11 +13,15 @@
   programs.zsh = {
     enable = true;
     ohMyZsh.enable = true;
-    shellAliases = {
-      vi = "nvim";
-    };
   };
   users.defaultUserShell = pkgs.zsh;
+
+  # Home manager (standalone) - symlink config for all hosts
+  system.activationScripts.homeManagerConfig = lib.stringAfter [ "users" ] ''
+    rm -rf /home/elias/.config/home-manager
+    ln -sf /home/elias/nixos-configs/home-manager /home/elias/.config/home-manager
+    chown -h elias:users /home/elias/.config/home-manager
+  '';
 
   # Common programs
   programs.neovim.enable = true;
