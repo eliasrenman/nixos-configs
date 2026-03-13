@@ -17,6 +17,8 @@
       "float, title:^(branchdialog)$"
       "float, class:^(Lxappearance)$"
       "float, class:^(wofi)$"
+      "dimaround, class:^(wofi)$"
+      "stayfocused, class:^(wofi)$"
       "float, class:^(viewnior)$"
       "float, title:^(Media viewer)$"
       "float, title:^(Volume Control)$"

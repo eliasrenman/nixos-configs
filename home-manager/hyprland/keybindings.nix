@@ -1,5 +1,39 @@
 { config, pkgs, lib, ... }:
 
+let
+  keybinds = [
+    { keys = "SUPER + T";                   desc = "Open terminal (Alacritty)"; }
+    { keys = "SUPER + Q";                   desc = "Close active window"; }
+    { keys = "SUPER + M";                   desc = "Exit Hyprland"; }
+    { keys = "SUPER + F";                   desc = "File manager (Thunar)"; }
+    { keys = "SUPER + V";                   desc = "Toggle floating mode"; }
+    { keys = "SUPER + SPACE";               desc = "App launcher (Wofi)"; }
+    { keys = "SUPER + P";                   desc = "Pseudo tiling"; }
+    { keys = "SUPER + J";                   desc = "Toggle split orientation"; }
+    { keys = "SUPER + L";                   desc = "Lock screen"; }
+    { keys = "SUPER + H";                   desc = "Show keybindings cheatsheet"; }
+    { keys = "SUPER + Arrow Keys";          desc = "Move focus between windows"; }
+    { keys = "SUPER + 1-0";                 desc = "Switch to workspace 1-10"; }
+    { keys = "SUPER + SHIFT + Left/Right";  desc = "Next/Previous workspace"; }
+    { keys = "SUPER + SHIFT + 1-0";         desc = "Move window to workspace 1-10"; }
+    { keys = "SUPER + Scroll";              desc = "Scroll through workspaces"; }
+    { keys = "SUPER + TAB";                 desc = "Cycle group windows"; }
+    { keys = "SUPER + CTRL + Arrow Keys";   desc = "Resize active window"; }
+    { keys = "SUPER + Print";               desc = "Color picker (Hyprpicker)"; }
+    { keys = "SUPER + LMB Drag";            desc = "Move window"; }
+    { keys = "SUPER + RMB Drag";            desc = "Resize window"; }
+  ];
+
+  keybindList = lib.concatMapStringsSep "\n"
+    (k: "${k.keys}  →  ${k.desc}")
+    keybinds;
+
+  hypr-keybinds = pkgs.writeShellScriptBin "hypr-keybinds" ''
+    cat <<'BINDS' | wofi --dmenu --prompt "Keybindings" --insensitive --normal-window
+${keybindList}
+BINDS
+  '';
+in
 {
   # Hyprland keybindings
   wayland.windowManager.hyprland.settings = {
@@ -68,6 +102,9 @@
 
       # Hardware buttons
       ", XF86PowerOff, exec, wlogout"
+
+      # Keybindings cheatsheet
+      "$mainMod, H, exec, ${hypr-keybinds}/bin/hypr-keybinds"
 
       # Screenshot
       ", Print, exec, grim -g \"$(slurp -d)\" - | wl-copy"
