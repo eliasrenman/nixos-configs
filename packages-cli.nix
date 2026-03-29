@@ -38,8 +38,7 @@ in
 
     # Languages & runtimes
     rustup
-    python3
-    python3Packages.pip
+    python311
     go
     bun
     pipx
@@ -50,13 +49,18 @@ in
     bat
     eza
     gh
+    tea
     killall
     glances
     qmk
     claude-code
+    opencode
 
     # Editors
     neovim
+
+    # Hardware programming
+    arduino-ide
 
     # Media
     ffmpeg-full

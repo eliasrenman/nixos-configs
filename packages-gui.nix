@@ -9,6 +9,7 @@
     # Editors/IDEs
     vscode
     zed-editor
+    (pkgs.writeShellScriptBin "zed" ''exec zeditor "$@"'')
 
     # File managers
     xfce.thunar
