@@ -14,6 +14,7 @@
     # File managers
     xfce.thunar
     xfce.thunar-archive-plugin
+    xarchiver
 
     # Media
     vlc
