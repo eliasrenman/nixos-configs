@@ -2,7 +2,10 @@
 { config, pkgs, ... }:
 
 let
-  zen-browser-src = builtins.fetchTarball "https://github.com/youwen5/zen-browser-flake/archive/master.tar.gz";
+  zen-browser-src = builtins.fetchTarball {
+    url = "https://github.com/youwen5/zen-browser-flake/archive/master.tar.gz";
+    sha256 = "1cyj4dhpwayibfb9q61v892pg61p2dnq1qy9rv4cr5vgsfyj8amh";
+  };
   zen-browser-pkgs = import zen-browser-src { inherit pkgs; };
 
   extension = shortId: guid: {

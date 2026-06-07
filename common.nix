@@ -2,6 +2,9 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Allow proprietary packages
   nixpkgs.config.allowUnfree = true;
 
@@ -44,6 +47,7 @@
   # Docker configuration
   virtualisation.docker = {
     enable = true;
+    package = pkgs.docker_29;
     daemon.settings = {
       dns = [ "8.8.8.8" "8.8.4.4" ];
     };
@@ -56,5 +60,6 @@
   environment.variables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
     LANGUAGE = "en_US:en";  # Force English messages for Git and other programs
+    PATH = "$HOME/.npm/bin:$PATH";
   };
 }

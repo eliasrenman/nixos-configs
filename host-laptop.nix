@@ -1,12 +1,12 @@
 # Laptop configuration (GNOME desktop)
 # Hardware: Huawei MateBook with Nvidia GPU
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
-    <nixos-hardware/huawei/machc-wa>
-    /etc/nixos/hardware-configuration.nix
+    inputs.nixos-hardware.nixosModules.huawei-machc-wa
+    ./hardware/laptop.nix
     ./common.nix
     ./packages-cli.nix
     ./packages-gui.nix

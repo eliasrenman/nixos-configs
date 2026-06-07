@@ -9,7 +9,7 @@ in
     enable = true;
     settings = {
       background = {
-        path = /home/elias/.config/wallpapers/forest-view.jpg;
+        path = ./assets/forest-view.jpg;
         fit = "Cover";
       };
       GTK = {

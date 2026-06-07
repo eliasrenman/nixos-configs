@@ -37,6 +37,12 @@ HOST="$1"
 COMMAND="$2"
 shift 2
 
+declare -A FLAKE_HOST_MAP=(
+    [laptop]=matebook
+    [minipc]=minipc
+    [wsl]=nixos-wsl
+)
+
 HOST_FILE="$SCRIPT_DIR/host-${HOST}.nix"
 
 # Validate host exists
@@ -61,7 +67,7 @@ case "$COMMAND" in
         ;;
 esac
 
+FLAKE_HOST="${FLAKE_HOST_MAP[$HOST]:-$HOST}"
+
 echo "Building '$HOST' with command '$COMMAND'..."
-sudo nixos-rebuild "$COMMAND" \
-    -I nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos \
-    -I nixos-config="$HOST_FILE" "$@"
+sudo nixos-rebuild "$COMMAND" --flake "path:$SCRIPT_DIR#$FLAKE_HOST" "$@"

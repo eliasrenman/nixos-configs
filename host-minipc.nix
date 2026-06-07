@@ -1,11 +1,11 @@
 # Mini PC configuration (Hyprland desktop)
 # Hardware: Ryzen-based system with integrated graphics
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    ./hardware/minipc.nix
     ./common.nix
     ./packages-cli.nix
     ./packages-gui.nix

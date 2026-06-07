@@ -1,11 +1,12 @@
 # WSL configuration (CLI only, minimal)
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
     ./common.nix
     ./packages-cli.nix
+    ./hardware/wsl.nix
   ];
 
   # WSL-specific settings

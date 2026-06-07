@@ -1,8 +1,9 @@
 # CLI tools and development toolchains - shared by all machines
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
   claude-code = pkgs.callPackage ./modules/claude-code.nix {};
+  llm-pkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   environment.systemPackages = with pkgs; [
@@ -65,7 +66,11 @@ in
     # Media
     ffmpeg-full
 
+    # LLM agents
+    llm-pkgs.pi
+    llm-pkgs.mistral-vibe
+    llm-pkgs.codex
+
     # Container tools
-    docker
   ];
 }
