@@ -61,5 +61,9 @@ in
       "blur, gtk-layer-shell"
       "blur, lockscreen"
     ];
+
+    windowrulev2 = [
+      "opacity 1.0 1.0 override, class:^(zen)$, title:^(Picture-in-Picture)$"
+    ];
   };
 }
