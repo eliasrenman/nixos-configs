@@ -9,7 +9,7 @@ in
     ./zsh.nix
   ] ++ lib.optionals isHyprland [
     ./hyprland
-    ./themes/tokyonight
+    ./themes/tokyonight-leftbar
   ];
 
   home.username = "elias";
