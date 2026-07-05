@@ -46,7 +46,7 @@ in
       "$mainMod, V, togglefloating,"
       "$mainMod, SPACE, exec, wofi --show drun --normal-window"
       "$mainMod, P, pseudo,"
-      "$mainMod, J, togglesplit,"
+      "$mainMod, J, layoutmsg, togglesplit"
       "$mainMod, L, exec, swaylock"
 
       # Focus movement

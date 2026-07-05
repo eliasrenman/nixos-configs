@@ -12,7 +12,6 @@ in
       border_size = 2;
       "col.inactive_border" = "rgba(f7768eff) rgba(bb9af7ff) 45deg";
       "col.active_border" = "rgba(bb9af7ff) rgba(f7768eff) 45deg";
-      no_border_on_floating = false;
       layout = "dwindle";
     };
 
@@ -29,7 +28,6 @@ in
 
       shadow = {
         enabled = true;
-        ignore_window = true;
         offset = "2 2";
         range = 8;
         render_power = 10;
@@ -58,12 +56,12 @@ in
     };
 
     layerrule = [
-      "blur, gtk-layer-shell"
-      "blur, lockscreen"
+      "blur on, match:namespace gtk-layer-shell"
+      "blur on, match:namespace lockscreen"
     ];
 
-    windowrulev2 = [
-      "opacity 1.0 1.0 override, class:^(zen)$, title:^(Picture-in-Picture)$"
+    windowrule = [
+      "opacity 1.0 override 1.0 override, match:class ^(zen)$, match:title ^(Picture-in-Picture)$"
     ];
   };
 }
