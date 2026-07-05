@@ -4,6 +4,9 @@
 let
   claude-code = pkgs.callPackage ./modules/claude-code.nix {};
   llm-pkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+  pipx = pkgs.pipx.overridePythonAttrs (_: {
+    doCheck = false;
+  });
 in
 {
   environment.systemPackages = with pkgs; [
@@ -39,14 +42,14 @@ in
 
     # Languages & runtimes
     rustup
-    python311
+    python3
     go
     bun
     pipx
     corepack
 
     # CLI tools
-    neofetch
+    fastfetch
     bat
     eza
     gh

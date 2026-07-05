@@ -4,7 +4,6 @@
   services.desktopManager.gnome.enable = true;
   services.displayManager.gdm = {
     enable = true;
-    wayland = true;
   };
 
   # Remove GNOME bloat you probably don't want
