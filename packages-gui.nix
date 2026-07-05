@@ -27,6 +27,7 @@
     alacritty
     warp-terminal
     bruno
+    inav-configurator
 
     # Audio tools
     alsa-tools
