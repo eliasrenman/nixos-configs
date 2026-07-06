@@ -1,11 +1,36 @@
 { config, pkgs, lib, ... }:
 
+let
+  wallpaper = ../../assets/forest-view.jpg;
+in
 {
   # Hyprpaper wallpaper daemon configuration
   home.file.".config/hypr/hyprpaper.conf".text = ''
-    preload = ~/.config/wallpapers/forest-view.jpg
+    wallpaper {
+      monitor = HDMI-A-1
+      path = ${wallpaper}
+      fit_mode = cover
+    }
 
-    wallpaper = eDP-1,~/.config/wallpapers/forest-view.jpg
-    wallpaper = ,~/.config/wallpapers/forest-view.jpg
+    wallpaper {
+      monitor =
+      path = ${wallpaper}
+      fit_mode = cover
+    }
   '';
+
+  systemd.user.services.hyprpaper = {
+    Unit = {
+      Description = "Hyprpaper wallpaper daemon";
+      PartOf = [ "hyprland-session.target" ];
+      After = [ "hyprland-session.target" ];
+    };
+
+    Service = {
+      ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
+      Restart = "on-failure";
+    };
+
+    Install.WantedBy = [ "hyprland-session.target" ];
+  };
 }
