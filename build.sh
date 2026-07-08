@@ -70,6 +70,13 @@ esac
 FLAKE_HOST="${FLAKE_HOST_MAP[$HOST]:-$HOST}"
 CURRENT_HOST="$(hostname)"
 
+if [[ "$HOST" == "laptop" && "$COMMAND" == "switch" && "${ALLOW_LIVE_LAPTOP_SWITCH:-0}" != "1" ]]; then
+    echo "Laptop live switch is disabled by default to avoid restarting GNOME/NVIDIA into a blank screen."
+    echo "Building and setting the next boot generation instead. Reboot to activate it."
+    echo "Set ALLOW_LIVE_LAPTOP_SWITCH=1 to force a live switch."
+    COMMAND="boot"
+fi
+
 has_target_host=false
 for arg in "$@"; do
     if [[ "$arg" == "--target-host" || "$arg" == --target-host=* ]]; then
