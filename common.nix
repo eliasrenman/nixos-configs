@@ -2,8 +2,14 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # Enable flakes and binary caches used by flake inputs
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    extra-substituters = [ "https://cache.numtide.com" ];
+    extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
+    builders-use-substitutes = true;
+    trusted-users = [ "root" "@wheel" ];
+  };
 
   # Allow proprietary packages
   nixpkgs.config.allowUnfree = true;

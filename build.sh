@@ -68,6 +68,47 @@ case "$COMMAND" in
 esac
 
 FLAKE_HOST="${FLAKE_HOST_MAP[$HOST]:-$HOST}"
+CURRENT_HOST="$(hostname)"
+
+has_target_host=false
+for arg in "$@"; do
+    if [[ "$arg" == "--target-host" || "$arg" == --target-host=* ]]; then
+        has_target_host=true
+        break
+    fi
+done
+
+case "$COMMAND" in
+    switch|boot|test|dry-activate)
+        if [[ "$has_target_host" == false && "$CURRENT_HOST" != "$HOST" && "$CURRENT_HOST" != "$FLAKE_HOST" ]]; then
+            echo "Error: refusing to run '$COMMAND' for host '$HOST' on local machine '$CURRENT_HOST'."
+            echo ""
+            echo "Use '$0 $HOST build' to build only, or deploy remotely with:"
+            echo "  $0 $HOST $COMMAND --target-host elias@$FLAKE_HOST --use-remote-sudo"
+            exit 1
+        fi
+        ;;
+esac
+
+NIX_CACHE_ARGS=(
+    --accept-flake-config
+    --option extra-substituters https://cache.numtide.com
+    --option extra-trusted-public-keys niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=
+)
+
+BUILD_LIMIT_ARGS=()
+if [[ "$HOST" == "laptop" ]]; then
+    BUILD_LIMIT_ARGS=(
+        --max-jobs "${NIX_MAX_JOBS:-1}"
+        --cores "${NIX_CORES:-2}"
+    )
+fi
 
 echo "Building '$HOST' with command '$COMMAND'..."
-sudo nixos-rebuild "$COMMAND" --flake "path:$SCRIPT_DIR#$FLAKE_HOST" "$@"
+REBUILD_CMD=(nixos-rebuild "$COMMAND" --flake "path:$SCRIPT_DIR#$FLAKE_HOST" "${NIX_CACHE_ARGS[@]}" "${BUILD_LIMIT_ARGS[@]}" "$@")
+
+if [[ "$has_target_host" == true ]]; then
+    "${REBUILD_CMD[@]}"
+else
+    sudo "${REBUILD_CMD[@]}"
+fi

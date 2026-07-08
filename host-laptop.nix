@@ -61,6 +61,15 @@
     startWhenNeeded = true;
   };
 
+  # Give memory-heavy local builds room to fail gracefully instead of taking
+  # down the graphical session when a binary cache misses.
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    swapDevices = 1;
+    memoryPercent = 100;
+  };
+
   # Fonts
   fonts.fontDir.enable = true;
 
