@@ -96,8 +96,21 @@
     anytype
     aseprite
     godot_4
+    pkgs."godot_4-export-templates-bin"
     blender
   ];
+
+  system.activationScripts.godotExportTemplates.text = ''
+    template_source="${pkgs."godot_4-export-templates-bin"}/share/godot/export_templates/4.6.3.stable"
+    template_target="/home/elias/.local/share/godot/export_templates/4.6.3.stable"
+
+    install -d -o elias -g users /home/elias/.local/share/godot/export_templates
+    if [ -e "$template_target" ] && [ ! -L "$template_target" ]; then
+      mv "$template_target" "$template_target.backup"
+    fi
+    ln -sfn "$template_source" "$template_target"
+    chown -h elias:users "$template_target"
+  '';
 
   system.stateVersion = "24.05";
 }

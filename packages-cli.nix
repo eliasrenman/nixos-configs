@@ -50,6 +50,7 @@ in
 
     # CLI tools
     fastfetch
+    ripgrep
     bat
     eza
     gh

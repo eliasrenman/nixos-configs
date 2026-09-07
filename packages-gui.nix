@@ -2,6 +2,9 @@
 { config, pkgs, ... }:
 
 {
+  # Network shares and trash support for Thunar.
+  services.gvfs.enable = true;
+
   environment.systemPackages = with pkgs; [
     # Browsers
     chromium
