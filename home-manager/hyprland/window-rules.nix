@@ -24,6 +24,11 @@
       "float on, match:title ^(Volume Control)$"
       "float on, match:title ^(Picture-in-Picture)$"
 
+      # Keep Thunar transfer progress compact (English and Swedish titles).
+      "float on, match:class ^([Tt]hunar)$, match:title ^(File Operation Progress|Förlopp för filåtgärder)$"
+      "size 600 250, match:class ^([Tt]hunar)$, match:title ^(File Operation Progress|Förlopp för filåtgärder)$"
+      "center on, match:class ^([Tt]hunar)$, match:title ^(File Operation Progress|Förlopp för filåtgärder)$"
+
       # Force tile
       "tile on, match:title ^(.*)(Godot)(.*)$"
       "tile on, match:title ^(.*)Aseprite(.*)$"
