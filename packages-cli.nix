@@ -4,6 +4,21 @@
 let
   claude-code = pkgs.callPackage ./modules/claude-code.nix {};
   llm-pkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+  codegraph = inputs.codegraph.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (_: {
+    npmDeps = pkgs.fetchNpmDeps {
+      src = inputs.codegraph;
+      hash = "sha256-J8viY38M/loCoJmpxEOIApN6cpf6sU2aa80knVNRSvI=";
+    };
+    # npm puts the root workspace's Vite 5 ahead of the UI's Vite 7 when
+    # running workspace scripts. Svelte plugin 6 requires Vite 6 or newer.
+    preBuild = ''
+      substituteInPlace ui/package.json \
+        --replace-fail '"build": "vite build"' '"build": "node ./node_modules/vite/bin/vite.js build"'
+    '';
+    postInstall = ''
+      rm -f $out/lib/codegraph/node_modules/@colbymchenry/codegraph-ui
+    '';
+  });
   pipx = pkgs.pipx.overridePythonAttrs (_: {
     doCheck = false;
   });
@@ -59,7 +74,7 @@ in
     glances
     qmk
     claude-code
-    opencode
+    codegraph
 
     # Editors
     neovim

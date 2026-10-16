@@ -14,6 +14,9 @@
     ./regreet.nix
   ];
 
+  # Run prebuilt Linux binaries installed by tools such as npm.
+  programs.nix-ld.enable = true;
+
   # Boot loader
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.consoleMode = "max";

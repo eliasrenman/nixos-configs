@@ -7,6 +7,7 @@
     ./window-rules.nix
     ./wofi.nix
     ./hyprpaper.nix
+    ./remote-desktop.nix
   ];
 
   wayland.windowManager.hyprland.enable = true;

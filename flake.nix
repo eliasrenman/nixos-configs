@@ -10,9 +10,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     llm-agents.url = "github:numtide/llm-agents.nix";
+    codegraph.url = "github:CUexter/codegraph/cfe961b5ccac8c9b858e2261dd66d85a9ea3fe16";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, llm-agents, ... }@inputs: {
+  outputs = { self, nixpkgs, nixos-hardware, llm-agents, codegraph, ... }@inputs: {
     nixosConfigurations = {
       minipc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
