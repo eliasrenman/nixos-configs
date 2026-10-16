@@ -4,6 +4,22 @@
 let
   claude-code = pkgs.callPackage ./modules/claude-code.nix {};
   llm-pkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+  rtk = pkgs.rustPlatform.buildRustPackage {
+    pname = "rtk";
+    version = "1.0.0";
+    src = inputs.rtk-upstream;
+    cargoHash = "sha256-n3wpRG/wrL7XtJzWPrizb72aKW7j6j8SJcPno5vv+94=";
+    cargoBuildFlags = [ "-p" "rtk" ];
+    doCheck = false;
+    nativeBuildInputs = [ pkgs.pkg-config ];
+    meta = with pkgs.lib; {
+      description = "Rust Token Killer CLI proxy";
+      homepage = "https://github.com/rtk-ai/rtk";
+      license = licenses.asl20;
+      mainProgram = "rtk";
+      platforms = platforms.unix;
+    };
+  };
   codegraph = inputs.codegraph.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (_: {
     npmDeps = pkgs.fetchNpmDeps {
       src = inputs.codegraph;
@@ -75,6 +91,7 @@ in
     qmk
     claude-code
     codegraph
+    rtk
 
     # Editors
     neovim

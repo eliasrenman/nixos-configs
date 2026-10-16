@@ -11,9 +11,16 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     llm-agents.url = "github:numtide/llm-agents.nix";
     codegraph.url = "github:CUexter/codegraph/cfe961b5ccac8c9b858e2261dd66d85a9ea3fe16";
+    # Keep the requested Nix flake available, while building from upstream's
+    # latest stable release so the package does not lag behind this branch.
+    rtk.url = "github:arnemileswinter/rtk/feat/nix-flake";
+    rtk-upstream = {
+      url = "github:rtk-ai/rtk/v1.0.0";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, llm-agents, codegraph, ... }@inputs: {
+  outputs = { self, nixpkgs, nixos-hardware, llm-agents, codegraph, rtk, rtk-upstream, ... }@inputs: {
     nixosConfigurations = {
       minipc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

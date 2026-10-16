@@ -200,12 +200,66 @@
         "type": "github"
       }
     },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1781577229,
+        "narHash": "sha256-lrp67w8AulE9Ks53n27I45ADSzbOCn4H+CNW1Ck8B+8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "codegraph": "codegraph",
         "llm-agents": "llm-agents",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_4",
+        "rtk": "rtk",
+        "rtk-upstream": "rtk-upstream"
+      }
+    },
+    "rtk": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_5"
+      },
+      "locked": {
+        "lastModified": 1781822258,
+        "narHash": "sha256-1LD4LaLk9TbvyNLBcQB54bWWakXr+eTCEAUwdW/g3cI=",
+        "owner": "arnemileswinter",
+        "repo": "rtk",
+        "rev": "a0000e8dce630605a361ab9d29639f62c660965c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "arnemileswinter",
+        "ref": "feat/nix-flake",
+        "repo": "rtk",
+        "type": "github"
+      }
+    },
+    "rtk-upstream": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791921052,
+        "narHash": "sha256-2MPcWWhJYMcafA+NYKj5novvBsHzcC0+U4Qm7CXSGAA=",
+        "owner": "rtk-ai",
+        "repo": "rtk",
+        "rev": "01f819c41da43698f5aedf2a8d730f716779009a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rtk-ai",
+        "ref": "v1.0.0",
+        "repo": "rtk",
+        "type": "github"
       }
     },
     "systems": {
