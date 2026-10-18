@@ -39,12 +39,15 @@ Home Manager starts WayVNC with the Hyprland session. It shares the existing
 desktop and requires that Elias is logged in to Hyprland; it does not provide a
 remote login screen. Apply changes with `home-manager switch`.
 
-A 2560×1440 virtual display (`VNC-FALLBACK`) stays available to the right of the
-physical monitor. When the monitor is turned off or unplugged, WayVNC can share
-this display and Hyprland moves the workspaces onto it. Sharing returns to
-`HDMI-A-1` when it reconnects. The virtual display is an extended desktop, so the
-pointer can move onto it while the physical monitor is on. WayVNC restarts after
-unexpected exits, including successful exits caused by losing an output.
+A 2560×1440 virtual display (`VNC-FALLBACK`) is created only when no physical
+monitor is available. If the last monitor is turned off or unplugged, WayVNC
+restarts and creates this fallback so headless access remains available (an
+active viewer may need to reconnect). When a physical monitor returns, capture
+switches back to it and the virtual display is removed, bringing its workspaces
+and windows back onto the real screen. There is no invisible extended desktop
+while a physical monitor is available, even when no VNC viewer is connected.
+WayVNC restarts after unexpected exits, including successful exits caused by
+losing an output.
 The cursor is rendered into the video by WayVNC for visibility in TigerVNC.
 
 When the first VNC client connects, the shared monitor switches to 2560×1440 if

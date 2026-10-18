@@ -55,6 +55,20 @@ let
         echo "Remote desktop resolution: $mode on $output."
       }
 
+      use_local_output() {
+        local output
+        output=$(hyprctl -j monitors | jq -r '
+          [.[] | select(.name != "VNC-FALLBACK") | .name][0] // empty')
+        if [ -n "$output" ]; then
+          # Switch capture first, then remove the invisible extended desktop.
+          # Hyprland moves its workspaces/windows back to the real monitor.
+          wayvncctl output-set "$output"
+          if hyprctl -j monitors all | jq -e '.[] | select(.name == "VNC-FALLBACK")' >/dev/null; then
+            hyprctl output remove VNC-FALLBACK
+          fi
+        fi
+      }
+
       if [ "''${1:-}" = restore ]; then
         restore
         exit 0
@@ -71,8 +85,8 @@ let
             fi
             ;;
           output-added)
-            if [ "$(jq -r '.params.name' <<< "$event")" = HDMI-A-1 ]; then
-              wayvncctl output-set HDMI-A-1
+            if [ "$(jq -r '.params.name' <<< "$event")" != VNC-FALLBACK ]; then
+              use_local_output
               if [ "$(wayvncctl --json client-list | jq length)" -gt 0 ]; then
                 connected
               fi
@@ -80,6 +94,7 @@ let
             ;;
           wayvnc-startup)
             # Also handle activation/restarting the watcher during a connection.
+            use_local_output
             if [ "$(wayvncctl --json client-list | jq length)" -gt 0 ]; then
               connected
             else
@@ -136,14 +151,19 @@ let
       EOF
       cat "$state_dir/credentials" >> "$runtime_config"
 
-      # Keep a real Wayland output available when the HDMI monitor powers off.
-      # Keep it independent: the mirrored handover test crashed in Hyprland's
-      # cursor capture code. This output is an extended desktop.
-      if ! hyprctl -j monitors all | jq -e '.[] | select(.name == "VNC-FALLBACK")' >/dev/null; then
-        hyprctl output create headless VNC-FALLBACK
+      # Only create an extended desktop when there is no local output. Keeping
+      # it alongside a real monitor strands workspaces on an invisible screen.
+      # If the last real output disappears, Restart=always reruns this setup.
+      output=$(hyprctl -j monitors | jq -r '
+        [.[] | select(.name != "VNC-FALLBACK") | .name][0] // empty')
+      if [ -z "$output" ]; then
+        if ! hyprctl -j monitors all | jq -e '.[] | select(.name == "VNC-FALLBACK")' >/dev/null; then
+          hyprctl output create headless VNC-FALLBACK
+        fi
+        output=VNC-FALLBACK
+      elif hyprctl -j monitors all | jq -e '.[] | select(.name == "VNC-FALLBACK")' >/dev/null; then
+        hyprctl output remove VNC-FALLBACK
       fi
-      output=$(hyprctl -j monitors | jq -er '
-        ([.[] | select(.name != "VNC-FALLBACK") | .name][0]) // "VNC-FALLBACK"')
       # The connection hook owns the resolution, rather than the viewer's size.
       exec wayvnc --render-cursor --disable-resizing --output="$output" --config="$runtime_config"
     '';
